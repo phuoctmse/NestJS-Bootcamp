@@ -24,10 +24,11 @@ export class Post {
     @OneToMany(() => Photo, (photo) => photo.post)
     photos: Photo[];
 
-    constructor(title: string, content: string) {
+    constructor(title: string, content: string, user: User) {
         this.title = title;
         this.content = content;
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        this.user = user;
     }
 }

@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class UserService {
@@ -15,7 +16,7 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     const user = new User(createUserDto.firstName, createUserDto.lastName);
-    return await this.userRepository.insertOne(user); 
+    return await this.userRepository.insertOne(user);
   }
 
   async findAll() {
@@ -23,15 +24,18 @@ export class UserService {
     return users
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.userRepository.findOne({ where: { _id: new ObjectId(id) } });
+    return user
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const updated_user = await this.userRepository.findOneAndUpdate({ _id: new ObjectId(id) }, { $set: updateUserDto })
+    return updated_user
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const deleted_user = await this.userRepository.findOneAndDelete({ _id: new ObjectId(id) })
+    return deleted_user
   }
 }

@@ -7,14 +7,14 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    const result = await this.userService.create(createUserDto);
-    return {
-      message: 'User created successfully',
-      data: result
-    }
-  }
+  // @Post()
+  // async create(@Body() createUserDto: CreateUserDto) {
+  //   const result = await this.userService.create(createUserDto);
+  //   return {
+  //     message: 'User created successfully',
+  //     data: result
+  //   }
+  // }
 
   @Get()
   findAll() {

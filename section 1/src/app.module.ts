@@ -9,7 +9,7 @@ import { PhotoModule } from './routes/photo/photo.module';
 import * as dotenv from 'dotenv';
 import { Post } from './routes/post/entities/post.entity';
 import { Photo } from './routes/photo/entities/photo.entity';
-
+import { AuthModule } from './routes/auth/auth.module';
 dotenv.config();
 
 @Module({
@@ -24,6 +24,7 @@ dotenv.config();
     UserModule,
     PostModule,
     PhotoModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

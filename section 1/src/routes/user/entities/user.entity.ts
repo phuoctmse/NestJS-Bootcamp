@@ -7,6 +7,12 @@ export class User {
   _id: ObjectId;
 
   @Column()
+  email: string;
+
+  @Column()
+  password: string;
+
+  @Column()
   firstName: string;
 
   @Column()
@@ -18,9 +24,11 @@ export class User {
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
-  constructor(firstName: string, lastName: string, isActive?: boolean) {
+  constructor(firstName: string, lastName: string, email: string, password: string, isActive?: boolean) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.email = email;
+    this.password = password;
     this.isActive = isActive ?? true;
   }
 }

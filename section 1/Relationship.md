@@ -24,6 +24,8 @@ Dự án này sử dụng NestJS và TypeORM để quản lý các entity trong 
   - `content`: Nội dung của bài viết (String)
   - `createdAt`: Thời gian tạo bài viết (Date)
   - `updatedAt`: Thời gian cập nhật bài viết (Date)
+  - `user`: ID của người dùng liên quan (ObjectId)
+  - `photos`: Danh sách các ảnh liên quan (Array of ObjectId)
 - **Mối Quan Hệ**:
   - Một `Post` thuộc về một `User`. (Many-to-One)
   - Một `Post` có thể có nhiều `Photo`. (One-to-Many)
@@ -35,5 +37,6 @@ Dự án này sử dụng NestJS và TypeORM để quản lý các entity trong 
   - `_id`: ID của ảnh (ObjectId)
   - `url`: Đường dẫn đến ảnh (String)
   - `description`: Mô tả của ảnh (String)
+  - `post`: ID của bài viết liên quan (ObjectId)
 - **Mối Quan Hệ**:
   - Một `Photo` thuộc về một `Post`. (Many-to-One)

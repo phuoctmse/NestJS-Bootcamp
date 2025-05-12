@@ -12,7 +12,7 @@ export class LoginBodyDTO {
 export class RegisterBodyDTO {
     @IsString()
     firstName: string
-    
+
     @IsString()
     lastName: string
 
@@ -26,4 +26,16 @@ export class RegisterBodyDTO {
     @IsString()
     @Match('password', { message: 'Password does not match' })
     confirmPassword: string
+}
+
+export class TokenPayloadDTO {
+
+    @IsEmail()
+    email: string
+
+    @IsString()
+    firstName: string
+
+    @IsString()
+    lastName: string
 }

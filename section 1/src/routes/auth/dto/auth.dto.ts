@@ -1,4 +1,5 @@
 import { IsEmail, IsString, Length } from "class-validator"
+import { Match } from "src/routes/decorator/custom.decorator."
 
 export class LoginBodyDTO {
     @IsEmail()
@@ -11,6 +12,7 @@ export class LoginBodyDTO {
 export class RegisterBodyDTO {
     @IsString()
     firstName: string
+    
     @IsString()
     lastName: string
 
@@ -22,6 +24,6 @@ export class RegisterBodyDTO {
     password: string
 
     @IsString()
-    
+    @Match('password', { message: 'Password does not match' })
     confirmPassword: string
 }

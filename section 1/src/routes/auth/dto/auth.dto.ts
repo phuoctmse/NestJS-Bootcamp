@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Length } from "class-validator"
+import { IsBoolean, IsEmail, IsString, Length } from "class-validator"
 import { Match } from "src/routes/decorator/custom.decorator."
 
 export class LoginBodyDTO {
@@ -38,4 +38,7 @@ export class TokenPayloadDTO {
 
     @IsString()
     lastName: string
+
+    @IsBoolean()
+    isActive: boolean
 }

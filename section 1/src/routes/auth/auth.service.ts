@@ -14,7 +14,7 @@ export class AuthService {
 
     async login(body: LoginBodyDTO) {
         const user = await this.userService.login(body.email, body.password)
-        const payload = { email: user.email, firstName: user.firstName, lastName: user.lastName }
+        const payload = { email: user.email, firstName: user.firstName, lastName: user.lastName, isActive: user.isActive }
         const tokens = await this.generateTokens(payload)
         return { tokens }
     }

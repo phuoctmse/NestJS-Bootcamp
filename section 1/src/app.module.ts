@@ -11,6 +11,12 @@ import { Post } from './routes/post/entities/post.entity';
 import { Photo } from './routes/photo/entities/photo.entity';
 import { AuthModule } from './routes/auth/auth.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
+import { GraphqlModule } from './graphql/graphql.module';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+
 dotenv.config();
 
 @Module({
@@ -22,10 +28,18 @@ dotenv.config();
       entities: [User, Post, Photo],
       synchronize: true,
     }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
+
+    }),
     UserModule,
     PostModule,
     PhotoModule,
     AuthModule,
+    GraphqlModule
   ],
   controllers: [AppController],
   providers: [AppService,

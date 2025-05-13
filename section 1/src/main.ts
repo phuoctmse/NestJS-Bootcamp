@@ -9,7 +9,7 @@ async function bootstrap() {
     whitelist: true, // tự động loại bỏ các field ko đc khai báo decorator trong DTO
     forbidNonWhitelisted: true, //field ko có trong DTO sẽ báo lỗi
   }));
-  app.useGlobalInterceptors(new TransformInterceptor())
+  // app.useGlobalInterceptors(new TransformInterceptor()) testing graphql
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

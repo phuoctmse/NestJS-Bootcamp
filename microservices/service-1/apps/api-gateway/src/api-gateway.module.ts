@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ApiGatewayController } from './api-gateway.controller';
 import { ApiGatewayService } from './api-gateway.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -11,10 +12,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         imports: [],
         name: 'MATH_SERVICE',
         useFactory: async () => ({
-          transport: Transport.TCP,
+          transport: Transport.GRPC,
           options: {
-            host: 'localhost',
-            port: 3002
+            url: '0.0.0.0:3001',
+            package: 'service1',
+            protoPath: join(process.cwd(), 'proto/service1.proto'),
           },
         }),
       },

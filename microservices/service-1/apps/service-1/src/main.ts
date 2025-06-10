@@ -1,16 +1,18 @@
 
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-import { ApiGatewayModule } from 'apps/api-gateway/src/api-gateway.module';
+import { AppModule } from './app.module';
+import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    ApiGatewayModule,
+    AppModule,
     {
-      transport: Transport.TCP,
+      transport: Transport.GRPC,
       options: {
-        host: 'localhost',
-        port: 3001,
+        url: '0.0.0.0:3001',
+        package: 'service1',
+        protoPath: join(process.cwd(), 'proto/service1.proto'),
       },
     },
   );
